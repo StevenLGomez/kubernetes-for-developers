@@ -12,7 +12,7 @@ class RequestHandler(BaseHTTPRequestHandler):
 
 def startServer():
     try:
-        server = ThreadingHTTPServer(('', 80), RequestHandler)
+        server = ThreadingHTTPServer(('', 8080), RequestHandler)
         print("Listening on " + ":".join(map(str, server.server_address)))
         server.serve_forever()
     except KeyboardInterrupt:
