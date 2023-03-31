@@ -14,13 +14,14 @@ spec:
     spec:
       containers:
       - name: timeserver-container
-        image: docker.io/wdenniss/timeserver:1
+        # image: docker.io/wdenniss/timeserver:1
+        image: quay.io/el_guapo/timeserver:003
         readinessProbe:
           initialDelaySeconds: 15
           periodSeconds: 30
           httpGet:
             path: /
-            port: 80
+            port: 8080
             scheme: HTTP
           timeoutSeconds: 2
           failureThreshold: 1
