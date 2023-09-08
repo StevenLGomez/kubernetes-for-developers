@@ -1,0 +1,75 @@
+
+# Kubernetes In Action - Notes
+
+This book is apparently the finished version of Kubernetes Quickly (which was withdrawn before release)
+
+My github repo 
+https://github.com/StevenLGomez/k-quickly.git
+
+is effectively replaced with 
+https://github.com/StevenLGomez/kubernetes-for-developers.git
+
+which was forked from
+https://github.com/WilliamDenniss/kubernetes-for-developers.git
+
+### Section 3.2 - Deploying To Kubernetes
+Kubernetes Quickly example 3.2.2 had failures that are addressed in Kubernetes For Developers,
+apparently related to permission issues (running as non-root) that are addressed in Chapter 12.
+
+In KFD this same project is Chapter03/3.2_DeployingToKubernetes
+
+kubectl create -f deploy.yaml
+kubectl create -f service.yaml
+oc expose service/timeserver
+kubectl port-forward deploy/timeserver 8080:80   <<== Book used this, but probably only for localhost
+kubectl get routes       <<== Copy URL
+URL in local browser worked OK   
+
+Page 68
+Cleanup - NOTE no spaces with commas
+kubectl delete deploy,service,pod timeserver
+
+Using imperative commands - URL issues, web page not accessible, YAML method above is repeatable though
+kubectl create deployment timeserver --image=quay.io/el_guapo/timeserver:003
+kubectl expose deployment timeserver --type=LoadBalancer --port 80
+oc expose service/timeserver
+
+Page 69 - Exporting configuration of imperatively created deployment
+kubectl get -o yaml $RESOURCE_TYPE $RESOURCE_NAME
+
+### Section 4.1.2 - Adding a Readiness Probe
+
+Page 78
+Chapter04/4.1.2_Readiness
+Commented the author's image, replaced with quay.io/el_guapo/timeserver:003
+
+Readiness probe did not succeed
+Changed to port:8080
+
+Readiness probe worked as expected
+
+### Section 4.1.3 - Adding a Liveness Probe
+
+Page 78
+Replaced author's image and changed to port 8080 <<== Worked OK
+
+### Section 4.1.4 - Designing Good Health Checks
+REVISIT THIS SECTION
+
+## Chapter 9 - Stateful Applications
+
+### Section 9.1.1 - Volumes
+
+Page 182
+Listing 9.1 - emptydir_pod.yaml - created OK.
+
+Page 184
+Listing 9.2 - mariadb_pod.yaml - Uses GKE Volumes FAILED.
+
+### Section 9.1.2 - Persistent Volumes & Claims
+
+
+
+
+
+
